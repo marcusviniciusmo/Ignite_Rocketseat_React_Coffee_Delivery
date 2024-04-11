@@ -5,6 +5,10 @@
     npm i @rocketseat/eslint-config -D
   }
 
+  ### - PHOSPHOR REACT {
+    npm i phosphor-react
+  }
+
   ### - REACT ROUTER DOM {
     npm i react-router-dom
   }
