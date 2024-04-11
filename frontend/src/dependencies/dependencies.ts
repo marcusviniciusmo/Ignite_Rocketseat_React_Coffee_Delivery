@@ -5,4 +5,8 @@
     npm i @rocketseat/eslint-config -D
   }
 
+  ### - STYLED COMPONENTS {
+    npm i styled-components
+  }
+
 */
