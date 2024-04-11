@@ -1,4 +1,5 @@
 import CoffeeDeliveryLogo from '../../assets/logo.svg';
+import { NavLink } from 'react-router-dom';
 import { MapPin, ShoppingCart } from 'phosphor-react';
 import {
   HeaderContainer,
@@ -12,17 +13,23 @@ import {
 export function Header() {
   return (
     <HeaderContainer>
-      <Image src={CoffeeDeliveryLogo} alt="" />
+      <NavLink to="/">
+        <Image src={CoffeeDeliveryLogo} alt="" title="Home Coffee Delivery" />
+      </NavLink>
 
       <Actions>
-        <Location>
-          <MapPin weight="fill" size={22} />
-          <City>Porto Alegre, RS</City>
-        </Location>
+        <NavLink to="/checkout">
+          <Location title="Meu endereço">
+            <MapPin weight="fill" size={22} />
+            <City>Porto Alegre, RS</City>
+          </Location>
+        </NavLink>
 
-        <Cart>
-          <ShoppingCart weight="fill" size={22} />
-        </Cart>
+        <NavLink to="/checkout">
+          <Cart title="Checkout">
+            <ShoppingCart weight="fill" size={22} />
+          </Cart>
+        </NavLink>
       </Actions>
     </HeaderContainer>
   );

@@ -20,6 +20,10 @@ export const HeaderContainer = styled.header`
   position: fixed;
   top: 0;
   z-index: var(--max-z-index);
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 export const Image = styled.img`
