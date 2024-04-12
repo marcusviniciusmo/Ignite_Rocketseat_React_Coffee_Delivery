@@ -1,5 +1,6 @@
 import ExpressoTradicional from '../../assets/expressoTradicional.png';
 import { ShoppingCart } from 'phosphor-react';
+import { Counter } from '../Counter';
 import {
   CoffeeCardContainer,
   Image,
@@ -29,7 +30,7 @@ export function CoffeeCard() {
           R$ <span className="coffeePrice">9,90</span>
         </span>
         <Actions>
-          <span>- 1 +</span>
+          <Counter />
           <Button>
             <ShoppingCart weight="fill" />
           </Button>
