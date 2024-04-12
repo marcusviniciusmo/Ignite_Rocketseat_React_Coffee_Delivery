@@ -2,9 +2,9 @@ import { Minus, Plus } from 'phosphor-react';
 import { CounterProps } from '../../@types/Counter';
 import { CounterContainer, Icon, QuantityItem } from './styles';
 
-export function Counter({ itemQuantity }: CounterProps) {
+export function Counter({ itemQuantity, className }: CounterProps) {
   return (
-    <CounterContainer>
+    <CounterContainer className={className}>
       <Icon title="Remover item" className="counterIcon">
         <Minus weight="bold" />
       </Icon>

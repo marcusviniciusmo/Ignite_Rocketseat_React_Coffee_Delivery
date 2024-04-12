@@ -12,6 +12,10 @@ export const CounterContainer = styled.div`
   gap: 0.4rem;
   user-select: none;
 
+  &.counterCheckout {
+    height: 3.2rem;
+  }
+
   &:hover {
     background: ${(props) => props.theme.baseHover};
   }

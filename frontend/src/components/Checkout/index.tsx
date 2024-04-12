@@ -8,6 +8,7 @@ import {
   Money,
   Trash,
 } from 'phosphor-react';
+import { Counter } from '../Counter';
 import { defaultTheme } from '../../styles/themes/default';
 import {
   CheckoutContainer,
@@ -116,7 +117,7 @@ export function Checkout() {
                 <ItemDetails>
                   <span className="itemName">Expresso Tradicional</span>
                   <ItemActions>
-                    <span>- 1 +</span>
+                    <Counter itemQuantity={1} className="counterCheckout" />
                     <ItemActionRemove title="Remover item">
                       <Trash />
                       <span className="itemRemoveText">Remover</span>
@@ -136,7 +137,7 @@ export function Checkout() {
                 <ItemDetails>
                   <span className="itemName">Latte</span>
                   <ItemActions>
-                    <span>- 1 +</span>
+                    <Counter itemQuantity={1} className="counterCheckout" />
                     <ItemActionRemove title="Remover item">
                       <Trash />
                       <span className="itemRemoveText">Remover</span>
