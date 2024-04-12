@@ -14,7 +14,7 @@ import {
 } from './styles';
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
-  const { name, imageUrl, description, tags, price } = coffee;
+  const { name, imageUrl, description, tags, price, quantity } = coffee;
 
   return (
     <CoffeeCardContainer>
@@ -31,7 +31,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
           R$ <span className="coffeePrice">{price.toFixed(2)}</span>
         </span>
         <Actions>
-          <Counter />
+          <Counter itemQuantity={quantity} />
           <Button>
             <ShoppingCart weight="fill" />
           </Button>
