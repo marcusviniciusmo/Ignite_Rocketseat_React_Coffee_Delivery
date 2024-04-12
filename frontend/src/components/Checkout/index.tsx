@@ -1,4 +1,5 @@
 import ExpressoTradicional from '../../assets/expressoTradicional.png';
+import { NavLink } from 'react-router-dom';
 import Latte from '../../assets/latte.png';
 import {
   MapPinLine,
@@ -165,9 +166,11 @@ export function Checkout() {
               <span>33,20</span>
             </TotalRow>
           </TotalContainer>
-          <ButtonConfirm type="submit" title="Confirmar pedido">
-            Confirmar Pedido
-          </ButtonConfirm>
+          <NavLink to="/success">
+            <ButtonConfirm type="submit" title="Confirmar pedido">
+              Confirmar Pedido
+            </ButtonConfirm>
+          </NavLink>
         </SubtotalLayout>
       </Aside>
     </CheckoutContainer>
