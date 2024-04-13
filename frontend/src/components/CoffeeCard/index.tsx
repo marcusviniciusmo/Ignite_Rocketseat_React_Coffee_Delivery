@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { ShoppingCart } from 'phosphor-react';
+import { CoffeesContext } from '../../contexts/Coffees';
 import { Counter } from '../Counter';
 import { CoffeeCardProps } from '../../@types/CoffeeCard';
 import {
@@ -15,6 +17,8 @@ import {
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
   const { id, name, imageUrl, description, tags, price, quantity } = coffee;
+
+  const { addItemToCart } = useContext(CoffeesContext);
 
   return (
     <CoffeeCardContainer>
@@ -35,7 +39,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
         </span>
         <Actions>
           <Counter itemQuantity={quantity} itemId={id} />
-          <Button>
+          <Button disabled={quantity < 1} onClick={() => addItemToCart(coffee)}>
             <ShoppingCart weight="fill" />
           </Button>
         </Actions>

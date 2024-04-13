@@ -10,6 +10,10 @@ const ActionButtonsProps: ActionButtonsType = {
   borderRadius: '0.6rem',
 };
 
+const widthCartButton = '3.8rem';
+const widthCounterItems = '2rem';
+const heightCounterItems = '2rem';
+
 export const HeaderContainer = styled.header`
   background: ${(props) => props.theme.background};
   width: 100%;
@@ -76,9 +80,26 @@ export const Cart = styled.div`
   justify-content: center;
   transition: 0.3s;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     background: ${(props) => props.theme.primaryColor};
     color: ${(props) => props.theme.primaryColorLight};
   }
+`;
+
+export const CounterItems = styled.div`
+  background: ${(props) => props.theme.primaryColorDark};
+  color: ${(props) => props.theme.white};
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: ${widthCounterItems};
+  height: ${heightCounterItems};
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: calc(${ActionButtonsProps.height} - (${heightCounterItems} / 2));
+  left: calc(${widthCartButton} - (${widthCounterItems} / 2));
 `;
