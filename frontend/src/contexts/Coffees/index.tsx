@@ -1,4 +1,5 @@
-import { ReactNode, createContext, useState } from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
+import { Catalog } from '../../data/CoffeeList';
 
 interface Coffee {
   id: number;
@@ -21,7 +22,11 @@ interface CoffeesProviderProps {
 export const CoffeesContext = createContext({} as CoffeeContextType);
 
 export function CoffeesContextProvider({ children }: CoffeesProviderProps) {
-  const [coffees] = useState<Coffee[]>([]);
+  const [coffees, setCoffees] = useState<Coffee[]>([]);
+
+  useEffect(() => {
+    setCoffees(Catalog.coffees);
+  }, [coffees]);
 
   return (
     <CoffeesContext.Provider value={{ coffees }}>
