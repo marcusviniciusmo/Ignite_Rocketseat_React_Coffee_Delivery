@@ -28,7 +28,10 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
       <Description>{description}</Description>
       <Buy>
         <span>
-          R$ <span className="coffeePrice">{price.toFixed(2)}</span>
+          R${' '}
+          <span className="coffeePrice">
+            {quantity > 0 ? (quantity * price).toFixed(2) : price.toFixed(2)}
+          </span>
         </span>
         <Actions>
           <Counter itemQuantity={quantity} itemId={id} />
