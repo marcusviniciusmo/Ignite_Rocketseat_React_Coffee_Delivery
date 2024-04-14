@@ -1,6 +1,7 @@
 import { ComponentProps } from 'react';
 
 export interface CounterProps extends ComponentProps<'div'> {
-  itemId?: number;
+  itemId: number;
   itemQuantity: number;
+  listType: 'coffees' | 'coffeesToCheckout';
 }

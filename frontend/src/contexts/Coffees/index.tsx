@@ -1,22 +1,13 @@
 import { ReactNode, createContext, useEffect, useState } from 'react';
 import { Catalog } from '../../data/CoffeeList';
-
-interface Coffee {
-  id: number;
-  name: string;
-  imageUrl: string;
-  tags: string[];
-  description: string;
-  price: number;
-  quantity: number;
-}
+import { Coffee } from '../../@types/CoffeeCard';
 
 interface CoffeeContextType {
   coffees: Coffee[] | null;
   coffeesToCheckout: Coffee[] | null;
   totalItemsToCart: number;
-  onAddItem: (id: number) => void;
-  onRemoveItem: (id: number) => void;
+  onIncreaseQuantity: (coffeId: number, coffeesList: string) => void;
+  onDecreaseQuantity: (coffeeId: number, coffeesList: string) => void;
   addItemToCart: (coffee: Coffee) => void;
 }
 
@@ -38,9 +29,9 @@ export function CoffeesContextProvider({ children }: CoffeesProviderProps) {
     setCoffees(Catalog.coffees);
   }, []);
 
-  function onAddItem(coffeeId: number) {
-    setCoffees((prevCoffees) =>
-      prevCoffees.map((item) =>
+  function onIncreaseQuantity(coffeeId: number, coffeesList: string) {
+    const updateList = (prevList: Coffee[]) =>
+      prevList.map((item) =>
         item.id === coffeeId
           ? {
               ...item,
@@ -50,13 +41,18 @@ export function CoffeesContextProvider({ children }: CoffeesProviderProps) {
                   : item.quantity,
             }
           : item,
-      ),
-    );
+      );
+
+    if (coffeesList === 'coffees') {
+      setCoffees(updateList);
+    } else if (coffeesList === 'coffeesToCheckout') {
+      setCoffeesToCheckout(updateList);
+    }
   }
 
-  function onRemoveItem(coffeeId: number) {
-    setCoffees((prevCoffees) =>
-      prevCoffees.map((item) =>
+  function onDecreaseQuantity(coffeeId: number, coffeesList: string) {
+    const updateList = (prevList: Coffee[]) =>
+      prevList.map((item) =>
         item.id === coffeeId
           ? {
               ...item,
@@ -66,8 +62,13 @@ export function CoffeesContextProvider({ children }: CoffeesProviderProps) {
                   : item.quantity,
             }
           : item,
-      ),
-    );
+      );
+
+    if (coffeesList === 'coffees') {
+      setCoffees(updateList);
+    } else if (coffeesList === 'coffeesToCheckout') {
+      setCoffeesToCheckout(updateList);
+    }
   }
 
   function addItemToCart(coffee: Coffee) {
@@ -93,8 +94,8 @@ export function CoffeesContextProvider({ children }: CoffeesProviderProps) {
         coffees,
         coffeesToCheckout,
         totalItemsToCart,
-        onAddItem,
-        onRemoveItem,
+        onIncreaseQuantity,
+        onDecreaseQuantity,
         addItemToCart,
       }}
     >
