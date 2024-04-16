@@ -37,7 +37,19 @@ import {
 } from './styles';
 
 export function Checkout() {
-  const { coffeesToCheckout } = useContext(CoffeesContext);
+  const { coffeesToCheckout, subtotal, frete, total } =
+    useContext(CoffeesContext);
+
+  function formatterPrice(price: number) {
+    return price.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    });
+  }
+
+  const subtotalFormatteded = formatterPrice(subtotal);
+  const freteFormatteded = formatterPrice(frete);
+  const totalFormatteded = formatterPrice(total);
 
   return (
     <CheckoutContainer>
@@ -148,17 +160,17 @@ export function Checkout() {
             <TotalContainer>
               <TotalRow>
                 <span>Total de itens</span>
-                <span className="itemsTotal">R$ 29,70</span>
+                <span className="itemsTotal">{subtotalFormatteded}</span>
               </TotalRow>
 
               <TotalRow>
                 <span>Entrega</span>
-                <span className="deliveryTotal">R$ 3,50</span>
+                <span className="deliveryTotal">{freteFormatteded}</span>
               </TotalRow>
 
               <TotalRow className="totalRow">
                 <span>Total</span>
-                <span>33,20</span>
+                <span>{totalFormatteded}</span>
               </TotalRow>
             </TotalContainer>
             <NavLink to="/success">
