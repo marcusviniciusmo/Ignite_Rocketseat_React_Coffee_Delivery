@@ -38,7 +38,12 @@ import {
 } from './styles';
 
 export function Checkout() {
-  const { paymentType, onHandlePaymentType } = useContext(UserContext);
+  const {
+    userAddress,
+    paymentType,
+    handleUpdateUserAddress,
+    onHandlePaymentType,
+  } = useContext(UserContext);
 
   const { coffeesToCheckout, subtotal, frete, total } =
     useContext(CoffeesContext);
@@ -81,22 +86,61 @@ export function Checkout() {
 
           <AddressForm>
             <InputRow>
-              <Input placeholder="CEP" />
+              <Input
+                name="cep"
+                placeholder="CEP"
+                value={userAddress?.cep}
+                onChange={(e) => handleUpdateUserAddress(e)}
+              />
             </InputRow>
 
             <InputRow>
-              <Input placeholder="Rua" width={56} />
+              <Input
+                name="rua"
+                placeholder="Rua"
+                width={56}
+                value={userAddress?.rua}
+                onChange={(e) => handleUpdateUserAddress(e)}
+              />
             </InputRow>
 
             <InputRow>
-              <Input placeholder="Número" />
-              <Input placeholder="Complemento - Opcional" width={34.8} />
+              <Input
+                name="numero"
+                placeholder="Número"
+                value={userAddress?.numero}
+                onChange={(e) => handleUpdateUserAddress(e)}
+              />
+              <Input
+                name="complemento"
+                placeholder="Complemento - Opcional"
+                width={34.8}
+                value={userAddress?.complemento}
+                onChange={(e) => handleUpdateUserAddress(e)}
+              />
             </InputRow>
 
             <InputRow>
-              <Input placeholder="Bairro" />
-              <Input placeholder="Cidade" width={27.6} />
-              <Input placeholder="UF" width={6} />
+              <Input
+                name="bairro"
+                placeholder="Bairro"
+                value={userAddress?.bairro}
+                onChange={(e) => handleUpdateUserAddress(e)}
+              />
+              <Input
+                name="cidade"
+                placeholder="Cidade"
+                width={27.6}
+                value={userAddress?.cidade}
+                onChange={(e) => handleUpdateUserAddress(e)}
+              />
+              <Input
+                name="uf"
+                placeholder="UF"
+                width={6}
+                value={userAddress?.uf}
+                onChange={(e) => handleUpdateUserAddress(e)}
+              />
             </InputRow>
           </AddressForm>
         </FormLayout>
