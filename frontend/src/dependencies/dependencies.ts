@@ -9,6 +9,10 @@
     npm i phosphor-react
   }
 
+  ### - REACT HOOK FORM {
+    npm i react-hook-form
+  }
+
   ### - REACT ROUTER DOM {
     npm i react-router-dom
   }
