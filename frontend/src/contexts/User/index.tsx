@@ -1,12 +1,18 @@
-import { ChangeEvent, ReactNode, createContext, useState } from 'react';
+import {
+  ChangeEvent,
+  ReactNode,
+  createContext,
+  useEffect,
+  useState,
+} from 'react';
 
 interface UserAddress {
   cep: string;
-  rua: string;
+  logradouro: string;
   numero: string;
   complemento: string;
   bairro: string;
-  cidade: string;
+  localidade: string;
   uf: string;
 }
 
@@ -26,14 +32,36 @@ export const UserContext = createContext({} as UserContextType);
 export function UserContextProvider({ children }: UserContextProps) {
   const [userAddress, setUserAddress] = useState<UserAddress>({
     cep: '',
-    rua: '',
+    logradouro: '',
     numero: '',
     complemento: '',
     bairro: '',
-    cidade: '',
+    localidade: '',
     uf: '',
   });
   const [paymentType, setPaymentType] = useState<string>('');
+
+  useEffect(() => {
+    if (userAddress.cep.length === 8) {
+      fetch(`https://viacep.com.br/ws/${userAddress.cep}/json/`)
+        .then((response) => response.json())
+        .then((data) => {
+          const mappedData: UserAddress = {
+            cep: data.cep,
+            logradouro: data.logradouro,
+            numero: '',
+            complemento: data.complemento,
+            bairro: data.bairro,
+            localidade: data.localidade,
+            uf: data.uf,
+          };
+          setUserAddress(mappedData);
+        })
+        .catch((error) => {
+          console.error('Erro ao buscar dados do CEP:', error);
+        });
+    }
+  }, [userAddress.cep]);
 
   function onHandlePaymentType(type: string) {
     setPaymentType(type);

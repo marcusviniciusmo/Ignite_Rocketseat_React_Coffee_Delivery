@@ -96,10 +96,10 @@ export function Checkout() {
 
             <InputRow>
               <Input
-                name="rua"
+                name="logradouro"
                 placeholder="Rua"
                 width={56}
-                value={userAddress?.rua}
+                value={userAddress?.logradouro}
                 onChange={(e) => handleUpdateUserAddress(e)}
               />
             </InputRow>
@@ -128,10 +128,10 @@ export function Checkout() {
                 onChange={(e) => handleUpdateUserAddress(e)}
               />
               <Input
-                name="cidade"
+                name="localidade"
                 placeholder="Cidade"
                 width={27.6}
-                value={userAddress?.cidade}
+                value={userAddress?.localidade}
                 onChange={(e) => handleUpdateUserAddress(e)}
               />
               <Input
