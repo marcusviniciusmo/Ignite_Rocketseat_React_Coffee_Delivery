@@ -87,9 +87,10 @@ export function Checkout() {
           <AddressForm>
             <InputRow>
               <Input
+                type="text"
                 name="cep"
                 placeholder="CEP"
-                value={userAddress?.cep}
+                value={userAddress?.cep.replace(/[^0-9]/, '')}
                 onChange={(e) => handleUpdateUserAddress(e)}
               />
             </InputRow>
@@ -161,8 +162,8 @@ export function Checkout() {
           <PaymentTypeForm>
             <PaymentTypeSelect
               title="Pagamento com cartão de crédito"
-              onClick={() => togglePaymentType('credito')}
-              className={paymentType === 'credito' ? 'active' : ''}
+              onClick={() => togglePaymentType('Cartão de Crédito')}
+              className={paymentType === 'Cartão de Crédito' ? 'active' : ''}
             >
               <CreditCard className="paymentTypeIcon" />
               <span>Cartão de crédito</span>
@@ -170,8 +171,8 @@ export function Checkout() {
 
             <PaymentTypeSelect
               title="Pagamento com cartão de débito"
-              onClick={() => togglePaymentType('debito')}
-              className={paymentType === 'debito' ? 'active' : ''}
+              onClick={() => togglePaymentType('Cartão de Débito')}
+              className={paymentType === 'Cartão de Débito' ? 'active' : ''}
             >
               <Bank className="paymentTypeIcon" />
               <span>Cartão de débito</span>
@@ -179,8 +180,8 @@ export function Checkout() {
 
             <PaymentTypeSelect
               title="Pagamento em dinheiro"
-              onClick={() => togglePaymentType('dinheiro')}
-              className={paymentType === 'dinheiro' ? 'active' : ''}
+              onClick={() => togglePaymentType('Dinheiro')}
+              className={paymentType === 'Dinheiro' ? 'active' : ''}
             >
               <Money className="paymentTypeIcon" />
               <span>Dinheiro</span>

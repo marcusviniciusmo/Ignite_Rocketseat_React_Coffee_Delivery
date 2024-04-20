@@ -43,6 +43,7 @@ export function UserContextProvider({ children }: UserContextProps) {
 
   useEffect(() => {
     if (userAddress.cep.length === 8) {
+      console.log(userAddress.cep);
       fetch(`https://viacep.com.br/ws/${userAddress.cep}/json/`)
         .then((response) => response.json())
         .then((data) => {

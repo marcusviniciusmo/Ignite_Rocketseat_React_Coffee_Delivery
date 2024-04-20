@@ -1,5 +1,6 @@
 import CoffeeDeliveryLogo from '../../assets/logo.svg';
 import { useContext } from 'react';
+import { UserContext } from '../../contexts/User';
 import { CoffeesContext } from '../../contexts/Coffees';
 import { NavLink } from 'react-router-dom';
 import { MapPin, ShoppingCart } from 'phosphor-react';
@@ -14,6 +15,7 @@ import {
 } from './styles';
 
 export function Header() {
+  const { userAddress } = useContext(UserContext);
   const { totalItemsToCart } = useContext(CoffeesContext);
 
   return (
@@ -26,7 +28,7 @@ export function Header() {
         <NavLink to="/checkout">
           <Location title="Meu endereço">
             <MapPin weight="fill" size={22} />
-            <City>Porto Alegre, RS</City>
+            <City>{`${`${userAddress?.localidade}, ${userAddress?.uf}`}`}</City>
           </Location>
         </NavLink>
 
