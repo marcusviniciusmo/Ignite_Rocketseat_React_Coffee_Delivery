@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { UserContext } from '../../contexts/User';
 import { CoffeesContext } from '../../contexts/Coffees';
 import { NavLink } from 'react-router-dom';
 import {
@@ -38,8 +39,24 @@ import {
 } from './styles';
 
 export function Checkout() {
+  const { paymentType, onHandleSetPaymentType } = useContext(UserContext);
+
   const { coffeesToCheckout, subtotal, deliveryRate, total } =
     useContext(CoffeesContext);
+
+  const TYPE_OF_PAYMENT = {
+    type1: 'Cartão de Crédito',
+    type2: 'Cartão de Débito',
+    type3: 'Dinheiro',
+  };
+
+  function togglePaymentType(type: string) {
+    if (type === paymentType) {
+      onHandleSetPaymentType('');
+    } else {
+      onHandleSetPaymentType(type);
+    }
+  }
 
   return (
     <CheckoutContainer>
@@ -94,17 +111,29 @@ export function Checkout() {
           </FormHeader>
 
           <PaymentTypeForm>
-            <PaymentTypeSelect title="Pagamento com cartão de crédito">
+            <PaymentTypeSelect
+              title="Pagamento com cartão de crédito"
+              className={paymentType === TYPE_OF_PAYMENT.type1 ? 'active' : ''}
+              onClick={() => togglePaymentType(TYPE_OF_PAYMENT.type1)}
+            >
               <CreditCard className="paymentTypeIcon" />
               <span>Cartão de crédito</span>
             </PaymentTypeSelect>
 
-            <PaymentTypeSelect title="Pagamento com cartão de débito">
+            <PaymentTypeSelect
+              title="Pagamento com cartão de débito"
+              className={paymentType === TYPE_OF_PAYMENT.type2 ? 'active' : ''}
+              onClick={() => togglePaymentType(TYPE_OF_PAYMENT.type2)}
+            >
               <Bank className="paymentTypeIcon" />
               <span>Cartão de débito</span>
             </PaymentTypeSelect>
 
-            <PaymentTypeSelect title="Pagamento em dinheiro">
+            <PaymentTypeSelect
+              title="Pagamento em dinheiro"
+              className={paymentType === TYPE_OF_PAYMENT.type3 ? 'active' : ''}
+              onClick={() => togglePaymentType(TYPE_OF_PAYMENT.type3)}
+            >
               <Money className="paymentTypeIcon" />
               <span>Dinheiro</span>
             </PaymentTypeSelect>
