@@ -143,6 +143,11 @@ export const PaymentTypeSelect = styled.button`
     background: ${(props) => props.theme.baseHover};
     color: ${(props) => props.theme.baseSubtitle};
   }
+
+  &.active {
+    background: ${(props) => props.theme.secondaryColorLight};
+    border: 1px solid ${(props) => props.theme.secondaryColor};
+  }
 `;
 
 export const SubtotalLayout = styled(CheckoutLayoutBase)`
