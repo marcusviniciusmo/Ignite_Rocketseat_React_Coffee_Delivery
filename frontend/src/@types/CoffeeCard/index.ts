@@ -1,4 +1,4 @@
-export interface CoffeeCardType {
+export interface Coffee {
   id: number;
   name: string;
   imageUrl: string;
@@ -9,9 +9,9 @@ export interface CoffeeCardType {
 }
 
 export interface CoffeeCardProps {
-  coffee: CoffeeCardType;
+  coffee: Coffee;
 }
 
 export interface CoffeeDataList {
-  coffees: CoffeeCardType[];
+  coffees: Coffee[];
 }

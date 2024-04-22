@@ -4,15 +4,20 @@ import { CoffeesContext } from '../../contexts/Coffees';
 import { CounterProps } from '../../@types/Counter';
 import { CounterContainer, Icon, QuantityItem } from './styles';
 
-export function Counter({ itemId, itemQuantity, className }: CounterProps) {
-  const { onAddItem, onRemoveItem } = useContext(CoffeesContext);
+export function Counter({
+  itemId,
+  itemQuantity,
+  listType,
+  className,
+}: CounterProps) {
+  const { onIncreaseQuantity, onDecreaseQuantity } = useContext(CoffeesContext);
 
   return (
     <CounterContainer className={className}>
       <Icon
         title="Remover item"
         className="counterIcon"
-        onClick={() => onRemoveItem(itemId!)}
+        onClick={() => onDecreaseQuantity(itemId, listType)}
       >
         <Minus weight="bold" />
       </Icon>
@@ -20,7 +25,7 @@ export function Counter({ itemId, itemQuantity, className }: CounterProps) {
       <Icon
         title="Adicionar item"
         className="counterIcon"
-        onClick={() => onAddItem(itemId!)}
+        onClick={() => onIncreaseQuantity(itemId, listType)}
       >
         <Plus weight="bold" />
       </Icon>

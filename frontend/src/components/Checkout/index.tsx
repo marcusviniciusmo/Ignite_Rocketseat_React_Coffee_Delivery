@@ -123,7 +123,9 @@ export function Checkout() {
                       <span className="itemName">{coffee.name}</span>
                       <ItemActions>
                         <Counter
+                          itemId={coffee.id}
                           itemQuantity={coffee.quantity}
+                          listType="coffeesToCheckout"
                           className="counterCheckout"
                         />
                         <ItemActionRemove title="Remover item">

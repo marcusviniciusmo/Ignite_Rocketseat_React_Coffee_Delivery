@@ -38,7 +38,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
           </span>
         </span>
         <Actions>
-          <Counter itemQuantity={quantity} itemId={id} />
+          <Counter itemId={id} itemQuantity={quantity} listType="coffees" />
           <Button disabled={quantity < 1} onClick={() => addItemToCart(coffee)}>
             <ShoppingCart weight="fill" />
           </Button>
