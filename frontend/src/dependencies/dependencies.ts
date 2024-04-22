@@ -11,6 +11,7 @@
 
   ### - REACT HOOK FORM {
     npm i react-hook-form
+    npm i @hookform/resolvers
   }
 
   ### - REACT ROUTER DOM {
