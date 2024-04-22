@@ -6,6 +6,9 @@ interface CoffeeContextType {
   coffees: Coffee[] | null;
   coffeesToCheckout: Coffee[] | null;
   totalItemsToCart: number;
+  subtotalItems: number;
+  deliveryRate: number;
+  totalItems: number;
   onIncreaseQuantity: (coffeId: number, coffeesList: string) => void;
   onDecreaseQuantity: (coffeId: number, coffeesList: string) => void;
   addItemToCart: (coffee: Coffee) => void;
@@ -21,6 +24,10 @@ export function CoffeesContextProvider({ children }: CoffeesProviderProps) {
   const [coffees, setCoffees] = useState<Coffee[]>([]);
   const [coffeesToCheckout, setCoffeesToCheckout] = useState<Coffee[]>([]);
   const [totalItemsToCart, setTotalItemsToCart] = useState<number>(0);
+  const [subtotalItems, setSubtotalItems] = useState<number>(0);
+  const [totalItems, setTotalItems] = useState<number>(0);
+
+  const deliveryRate = subtotalItems ? 3.5 : 0;
 
   const maxItemQuantity = 99;
   const minItemQuantity = 0;
@@ -28,6 +35,11 @@ export function CoffeesContextProvider({ children }: CoffeesProviderProps) {
   useEffect(() => {
     setCoffees(Catalog.coffees);
   }, []);
+
+  useEffect(() => {
+    getSubtotalItems(coffeesToCheckout);
+    setTotalItems(subtotalItems + deliveryRate);
+  }, [coffeesToCheckout, subtotalItems, deliveryRate]);
 
   function onIncreaseQuantity(coffeeId: number, coffeesList: string) {
     const updateList = (prevList: Coffee[]) =>
@@ -88,12 +100,27 @@ export function CoffeesContextProvider({ children }: CoffeesProviderProps) {
     );
   }
 
+  function getSubtotalItems(coffeesList: Coffee[]) {
+    let subtotal = 0;
+
+    coffeesList.forEach((item) => {
+      const count = item.quantity * item.price;
+
+      subtotal += count;
+    });
+
+    setSubtotalItems(subtotal);
+  }
+
   return (
     <CoffeesContext.Provider
       value={{
         coffees,
         coffeesToCheckout,
         totalItemsToCart,
+        subtotalItems,
+        deliveryRate,
+        totalItems,
         onIncreaseQuantity,
         onDecreaseQuantity,
         addItemToCart,

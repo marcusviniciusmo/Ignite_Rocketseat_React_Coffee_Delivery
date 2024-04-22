@@ -10,6 +10,7 @@ import {
   Trash,
 } from 'phosphor-react';
 import { Counter } from '../Counter';
+import { formatterPrice } from '../../utils/Functions';
 import { defaultTheme } from '../../styles/themes/default';
 import {
   CheckoutContainer,
@@ -37,7 +38,8 @@ import {
 } from './styles';
 
 export function Checkout() {
-  const { coffeesToCheckout } = useContext(CoffeesContext);
+  const { coffeesToCheckout, subtotalItems, deliveryRate, totalItems } =
+    useContext(CoffeesContext);
 
   return (
     <CheckoutContainer>
@@ -147,17 +149,21 @@ export function Checkout() {
           <TotalContainer>
             <TotalRow>
               <span>Total de itens</span>
-              <span className="itemsTotal">R$ 29,70</span>
+              <span className="itemsTotal">
+                {formatterPrice(subtotalItems)}
+              </span>
             </TotalRow>
 
             <TotalRow>
               <span>Entrega</span>
-              <span className="deliveryTotal">R$ 3,50</span>
+              <span className="deliveryTotal">
+                {formatterPrice(deliveryRate)}
+              </span>
             </TotalRow>
 
             <TotalRow className="totalRow">
               <span>Total</span>
-              <span>33,20</span>
+              <span>{formatterPrice(totalItems)}</span>
             </TotalRow>
           </TotalContainer>
           <NavLink to="/success">
