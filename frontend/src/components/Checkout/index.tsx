@@ -85,7 +85,7 @@ export function Checkout() {
               <Input
                 name="cep"
                 placeholder="CEP"
-                value={userAddress.cep}
+                value={userAddress.cep.replace(/[^0-9]/, '')}
                 onChange={(e) => onHandleUpdateUserAddress(e)}
               />
             </InputRow>
