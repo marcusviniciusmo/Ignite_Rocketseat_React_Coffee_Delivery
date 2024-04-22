@@ -21,4 +21,8 @@
     npm i styled-components
   }
 
+  ### - ZOD {
+    npm i zod
+  }
+
 */
