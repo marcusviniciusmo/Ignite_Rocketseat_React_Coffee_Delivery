@@ -9,6 +9,8 @@ interface CoffeeContextType {
   subtotalItems: number;
   deliveryRate: number;
   totalItems: number;
+  minDeliveryTime: number;
+  maxDeliveryTime: number;
   onIncreaseQuantity: (coffeId: number, coffeesList: string) => void;
   onDecreaseQuantity: (coffeId: number, coffeesList: string) => void;
   addItemToCart: (coffee: Coffee) => void;
@@ -28,6 +30,8 @@ export function CoffeesContextProvider({ children }: CoffeesProviderProps) {
   const [totalItems, setTotalItems] = useState<number>(0);
 
   const deliveryRate = subtotalItems ? 3.5 : 0;
+  const minDeliveryTime = 20;
+  const maxDeliveryTime = 30;
 
   const maxItemQuantity = 99;
   const minItemQuantity = 0;
@@ -121,6 +125,8 @@ export function CoffeesContextProvider({ children }: CoffeesProviderProps) {
         subtotalItems,
         deliveryRate,
         totalItems,
+        minDeliveryTime,
+        maxDeliveryTime,
         onIncreaseQuantity,
         onDecreaseQuantity,
         addItemToCart,

@@ -1,5 +1,8 @@
 import Delivering from '../../assets/delivering.png';
+import { useContext } from 'react';
 import { MapPin, Timer, CurrencyDollar } from 'phosphor-react';
+import { UserContext } from '../../contexts/User';
+import { CoffeesContext } from '../../contexts/Coffees';
 import {
   SuccessContainer,
   SuccessMessage,
@@ -12,6 +15,9 @@ import {
 } from './styles';
 
 export function Success() {
+  const { userAddress, paymentType } = useContext(UserContext);
+  const { minDeliveryTime, maxDeliveryTime } = useContext(CoffeesContext);
+
   return (
     <SuccessContainer>
       <div>
@@ -28,10 +34,12 @@ export function Success() {
               <TextRow>
                 Entrega em{' '}
                 <span className="dataUser">
-                  Rua João Daniel Martinelli, 102
+                  {`${userAddress.logradouro}, ${userAddress.numero}`}
                 </span>
               </TextRow>
-              <TextRow>Farrapos - Porto Alegre, RS</TextRow>
+              <TextRow>
+                {`${userAddress.bairro} - ${userAddress.localidade}, ${userAddress.uf}`}
+              </TextRow>
             </div>
           </OrderRow>
           <OrderRow>
@@ -41,7 +49,9 @@ export function Success() {
             <div>
               <TextRow>Previsão de entrega</TextRow>
               <TextRow>
-                <span className="dataUser">20 min - 30 min</span>
+                <span className="dataUser">
+                  {`${minDeliveryTime} min - ${maxDeliveryTime} min`}
+                </span>
               </TextRow>
             </div>
           </OrderRow>
@@ -52,7 +62,7 @@ export function Success() {
             <div>
               <TextRow>Pagamento na entrega</TextRow>
               <TextRow>
-                <span className="dataUser">Cartão de Crédito</span>
+                <span className="dataUser">{paymentType}</span>
               </TextRow>
             </div>
           </OrderRow>
