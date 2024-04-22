@@ -13,6 +13,7 @@ interface Coffee {
 
 interface CoffeeContextType {
   coffees: Coffee[] | null;
+  coffeesToCheckout: Coffee[] | null;
   totalItemsToCart: number;
   onAddItem: (id: number) => void;
   onRemoveItem: (id: number) => void;
@@ -27,7 +28,7 @@ export const CoffeesContext = createContext({} as CoffeeContextType);
 
 export function CoffeesContextProvider({ children }: CoffeesProviderProps) {
   const [coffees, setCoffees] = useState<Coffee[]>([]);
-  const [, setCoffeesToCheckout] = useState<Coffee[]>([]);
+  const [coffeesToCheckout, setCoffeesToCheckout] = useState<Coffee[]>([]);
   const [totalItemsToCart, setTotalItemsToCart] = useState<number>(0);
 
   const maxItemQuantity = 99;
@@ -90,6 +91,7 @@ export function CoffeesContextProvider({ children }: CoffeesProviderProps) {
     <CoffeesContext.Provider
       value={{
         coffees,
+        coffeesToCheckout,
         totalItemsToCart,
         onAddItem,
         onRemoveItem,

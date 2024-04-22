@@ -1,6 +1,6 @@
-import ExpressoTradicional from '../../assets/expressoTradicional.png';
+import { useContext } from 'react';
+import { CoffeesContext } from '../../contexts/Coffees';
 import { NavLink } from 'react-router-dom';
-import Latte from '../../assets/latte.png';
 import {
   MapPinLine,
   CurrencyDollar,
@@ -37,6 +37,8 @@ import {
 } from './styles';
 
 export function Checkout() {
+  const { coffeesToCheckout } = useContext(CoffeesContext);
+
   return (
     <CheckoutContainer>
       <Aside>
@@ -111,45 +113,35 @@ export function Checkout() {
       <Aside>
         <Text>Café selecionado</Text>
         <SubtotalLayout>
-          <ItemCardCheckout>
-            <ItemContent>
-              <ItemInfo>
-                <ItemImage src={ExpressoTradicional} />
-                <ItemDetails>
-                  <span className="itemName">Expresso Tradicional</span>
-                  <ItemActions>
-                    <Counter itemQuantity={1} className="counterCheckout" />
-                    <ItemActionRemove title="Remover item">
-                      <Trash />
-                      <span className="itemRemoveText">Remover</span>
-                    </ItemActionRemove>
-                  </ItemActions>
-                </ItemDetails>
-              </ItemInfo>
-              <span className="itemPrice">R$ 9,90</span>
-            </ItemContent>
-            <div className="divider" />
-          </ItemCardCheckout>
+          {coffeesToCheckout!.map((coffee) => {
+            return (
+              <ItemCardCheckout key={coffee.id}>
+                <ItemContent>
+                  <ItemInfo>
+                    <ItemImage src={coffee.imageUrl} />
+                    <ItemDetails>
+                      <span className="itemName">{coffee.name}</span>
+                      <ItemActions>
+                        <Counter
+                          itemQuantity={coffee.quantity}
+                          className="counterCheckout"
+                        />
+                        <ItemActionRemove title="Remover item">
+                          <Trash />
+                          <span className="itemRemoveText">Remover</span>
+                        </ItemActionRemove>
+                      </ItemActions>
+                    </ItemDetails>
+                  </ItemInfo>
+                  <span className="itemPrice">
+                    {`R$ ${(coffee.quantity * coffee.price).toFixed(2)}`}
+                  </span>
+                </ItemContent>
+                <div className="divider" />
+              </ItemCardCheckout>
+            );
+          })}
 
-          <ItemCardCheckout>
-            <ItemContent>
-              <ItemInfo>
-                <ItemImage src={Latte} />
-                <ItemDetails>
-                  <span className="itemName">Latte</span>
-                  <ItemActions>
-                    <Counter itemQuantity={1} className="counterCheckout" />
-                    <ItemActionRemove title="Remover item">
-                      <Trash />
-                      <span className="itemRemoveText">Remover</span>
-                    </ItemActionRemove>
-                  </ItemActions>
-                </ItemDetails>
-              </ItemInfo>
-              <span className="itemPrice">R$ 19,90</span>
-            </ItemContent>
-            <div className="divider" />
-          </ItemCardCheckout>
           <TotalContainer>
             <TotalRow>
               <span>Total de itens</span>
